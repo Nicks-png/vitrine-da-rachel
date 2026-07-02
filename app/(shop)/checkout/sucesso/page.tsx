@@ -27,7 +27,7 @@ export default function CheckoutSucessoPage() {
       </p>
       <Link
         href="/loja"
-        className="inline-block bg-[#1C1410] hover:bg-[#8B2E4A] text-white text-[11px] tracking-[0.15em] uppercase font-medium px-9 py-3.5 transition-colors duration-300"
+        className="rounded-md inline-block bg-[#1C1410] hover:bg-[#8B2E4A] text-white text-[11px] tracking-[0.15em] uppercase font-medium px-9 py-3.5 transition-colors duration-300"
       >
         Continuar comprando
       </Link>

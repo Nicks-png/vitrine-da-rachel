@@ -1,6 +1,8 @@
 import { createServerSupabaseClient } from "@/lib/supabase-server";
 import { mockProdutos } from "@/lib/mock-products";
+import { buildCuratedSections } from "@/lib/product-sections";
 import ProductCard from "@/components/shop/ProductCard";
+import ProductCarousel from "@/components/shop/ProductCarousel";
 import type { Produto } from "@/lib/types";
 
 const CATEGORIAS = ["Todos", "Roupas", "Acessórios"];
@@ -43,8 +45,24 @@ export default async function LojaPage({ searchParams }: Props) {
   const produtos = await getProdutos(categoria);
   const categoriaAtiva = categoria ?? "Todos";
 
+  const secoes = categoriaAtiva === "Todos" ? buildCuratedSections(produtos) : null;
+
   return (
     <div className="max-w-6xl mx-auto px-8 py-16">
+      {secoes && (
+        <div className="space-y-20 mb-24">
+          <ProductCarousel eyebrow="Seleção" titulo="Escolhas da Rachel" produtos={secoes.escolhas} />
+          {secoes.promocoes.length > 0 && (
+            <ProductCarousel eyebrow="Por tempo limitado" titulo="Promoções" produtos={secoes.promocoes} />
+          )}
+          <ProductCarousel eyebrow="Acabou de chegar" titulo="Lançamentos" produtos={secoes.lancamentos} />
+          {secoes.ultimasUnidades.length > 0 && (
+            <ProductCarousel eyebrow="Estoque limitado" titulo="Últimas unidades" produtos={secoes.ultimasUnidades} />
+          )}
+          <div className="border-t border-[#E0D3C6]" />
+        </div>
+      )}
+
       {/* Topo */}
       <div className="mb-12">
         <p className="text-[9px] tracking-[0.4em] uppercase text-[#B8956A] mb-2">Bazar</p>
@@ -62,7 +80,7 @@ export default async function LojaPage({ searchParams }: Props) {
           <a
             key={cat}
             href={cat === "Todos" ? "/loja" : `/loja?categoria=${encodeURIComponent(cat)}`}
-            className={`text-[9.5px] tracking-[0.2em] uppercase px-6 py-2.5 border transition-colors duration-300 ${
+            className={`rounded-md text-[9.5px] tracking-[0.2em] uppercase px-6 py-2.5 border transition-colors duration-300 ${
               categoriaAtiva === cat
                 ? "bg-[#1C1410] text-white border-[#1C1410]"
                 : "bg-transparent text-[#7A6458] border-[#E0D3C6] hover:border-[#1C1410] hover:text-[#1C1410]"

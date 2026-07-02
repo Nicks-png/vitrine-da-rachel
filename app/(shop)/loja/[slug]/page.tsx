@@ -92,7 +92,7 @@ export default function ProdutoPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-14">
         {/* Galeria */}
         <div className="space-y-3">
-          <div className="relative aspect-[3/4] bg-[#F2EAE0] overflow-hidden">
+          <div className="relative aspect-[3/4] bg-[#F2EAE0] overflow-hidden rounded-md">
             {produto.imagens[imgIdx] ? (
               <Image
                 src={produto.imagens[imgIdx]}
@@ -111,14 +111,14 @@ export default function ProdutoPage() {
               <>
                 <button
                   onClick={() => setImgIdx((i) => (i - 1 + produto.imagens.length) % produto.imagens.length)}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 bg-white/85 hover:bg-white p-2 transition-colors"
+                  className="rounded-md absolute left-3 top-1/2 -translate-y-1/2 bg-white/85 hover:bg-white p-2 transition-colors"
                   aria-label="Imagem anterior"
                 >
                   <ChevronLeft size={16} />
                 </button>
                 <button
                   onClick={() => setImgIdx((i) => (i + 1) % produto.imagens.length)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 bg-white/85 hover:bg-white p-2 transition-colors"
+                  className="rounded-md absolute right-3 top-1/2 -translate-y-1/2 bg-white/85 hover:bg-white p-2 transition-colors"
                   aria-label="Próxima imagem"
                 >
                   <ChevronRight size={16} />
@@ -133,7 +133,7 @@ export default function ProdutoPage() {
                 <button
                   key={i}
                   onClick={() => setImgIdx(i)}
-                  className={`relative shrink-0 w-16 h-20 overflow-hidden border transition-colors ${
+                  className={`relative shrink-0 w-16 h-20 overflow-hidden rounded border transition-colors ${
                     i === imgIdx ? "border-[#8B2E4A]" : "border-transparent opacity-70 hover:opacity-100"
                   }`}
                 >
@@ -179,7 +179,7 @@ export default function ProdutoPage() {
                   <button
                     key={t}
                     onClick={() => setTamanho(t)}
-                    className={`min-w-[44px] h-10 px-3 border text-[13px] font-medium transition-colors ${
+                    className={`rounded min-w-[44px] h-10 px-3 border text-[13px] font-medium transition-colors ${
                       tamanho === t
                         ? "border-[#1C1410] bg-[#1C1410] text-white"
                         : "border-[#E0D3C6] text-[#1C1410] hover:border-[#8B2E4A]"
@@ -207,7 +207,7 @@ export default function ProdutoPage() {
           <button
             onClick={handleAdd}
             disabled={produto.estoque === 0}
-            className="mt-auto w-full flex items-center justify-center gap-2.5 bg-[#1C1410] hover:bg-[#8B2E4A] disabled:opacity-40 disabled:pointer-events-none text-white text-[11px] tracking-[0.15em] uppercase font-medium py-4 transition-colors duration-300"
+            className="rounded-md mt-auto w-full flex items-center justify-center gap-2.5 bg-[#1C1410] hover:bg-[#8B2E4A] disabled:opacity-40 disabled:pointer-events-none text-white text-[11px] tracking-[0.15em] uppercase font-medium py-4 transition-colors duration-300"
           >
             <ShoppingBag size={15} />
             Adicionar ao carrinho

@@ -13,7 +13,7 @@ export const mockProdutos: Produto[] = [
     slug: "blusa-linho-canelada",
     estoque: 8,
     ativo: true,
-    created_at: new Date().toISOString(),
+    created_at: "2026-06-27T12:00:00.000Z",
   },
   {
     id: "2",
@@ -27,7 +27,7 @@ export const mockProdutos: Produto[] = [
     slug: "vestido-midi-floral",
     estoque: 5,
     ativo: true,
-    created_at: new Date().toISOString(),
+    created_at: "2026-06-18T12:00:00.000Z",
   },
   {
     id: "3",
@@ -41,7 +41,7 @@ export const mockProdutos: Produto[] = [
     slug: "bolsa-tiracolo-caramelo",
     estoque: 12,
     ativo: true,
-    created_at: new Date().toISOString(),
+    created_at: "2026-06-12T12:00:00.000Z",
   },
   {
     id: "4",
@@ -55,7 +55,7 @@ export const mockProdutos: Produto[] = [
     slug: "calca-wide-leg-bege",
     estoque: 6,
     ativo: true,
-    created_at: new Date().toISOString(),
+    created_at: "2026-06-24T12:00:00.000Z",
   },
   {
     id: "5",
@@ -69,7 +69,7 @@ export const mockProdutos: Produto[] = [
     slug: "brinco-argola-dourada",
     estoque: 20,
     ativo: true,
-    created_at: new Date().toISOString(),
+    created_at: "2026-06-05T12:00:00.000Z",
   },
   {
     id: "6",
@@ -83,6 +83,6 @@ export const mockProdutos: Produto[] = [
     slug: "conjunto-cropped-saia",
     estoque: 4,
     ativo: true,
-    created_at: new Date().toISOString(),
+    created_at: "2026-06-30T12:00:00.000Z",
   },
 ];

@@ -29,7 +29,7 @@ function Field({
       <input
         id={id}
         {...props}
-        className="w-full border border-[#E0D3C6] focus:border-[#8B2E4A] focus:outline-none bg-white px-4 py-3 text-[14px] text-[#1C1410] placeholder:text-[#B8A99B] transition-colors"
+        className="rounded-md w-full border border-[#E0D3C6] focus:border-[#8B2E4A] focus:outline-none bg-white px-4 py-3 text-[14px] text-[#1C1410] placeholder:text-[#B8A99B] transition-colors"
       />
     </div>
   );
@@ -59,7 +59,7 @@ export default function CheckoutPage() {
         <p className="text-[#7A6458] text-[14px] mb-9">Adicione produtos antes de finalizar.</p>
         <Link
           href="/loja"
-          className="inline-block bg-[#1C1410] hover:bg-[#8B2E4A] text-white text-[11px] tracking-[0.15em] uppercase font-medium px-9 py-3.5 transition-colors duration-300"
+          className="rounded-md inline-block bg-[#1C1410] hover:bg-[#8B2E4A] text-white text-[11px] tracking-[0.15em] uppercase font-medium px-9 py-3.5 transition-colors duration-300"
         >
           Ir para a loja
         </Link>
@@ -105,7 +105,7 @@ export default function CheckoutPage() {
         {/* Formulário / Pagamento */}
         <div className="lg:col-span-2">
           {etapa === "dados" ? (
-            <form onSubmit={handleContinuar} className="bg-white border border-[#E0D3C6] p-7 space-y-5">
+            <form onSubmit={handleContinuar} className="rounded-md bg-white border border-[#E0D3C6] p-7 space-y-5">
               <h2
                 className="font-semibold text-[1.1rem] text-[#1C1410] pb-5 border-b border-[#E0D3C6]"
                 style={{ fontFamily: "var(--font-playfair)" }}
@@ -145,13 +145,13 @@ export default function CheckoutPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-[#1C1410] hover:bg-[#8B2E4A] disabled:opacity-50 text-white text-[11px] tracking-[0.15em] uppercase font-medium py-4 mt-2 transition-colors duration-300"
+                className="rounded-md w-full bg-[#1C1410] hover:bg-[#8B2E4A] disabled:opacity-50 text-white text-[11px] tracking-[0.15em] uppercase font-medium py-4 mt-2 transition-colors duration-300"
               >
                 {loading ? "Processando..." : "Continuar para pagamento"}
               </button>
             </form>
           ) : (
-            <div className="bg-white border border-[#E0D3C6] p-7">
+            <div className="rounded-md bg-white border border-[#E0D3C6] p-7">
               <h2
                 className="font-semibold text-[1.1rem] text-[#1C1410] pb-5 mb-6 border-b border-[#E0D3C6]"
                 style={{ fontFamily: "var(--font-playfair)" }}
@@ -164,7 +164,7 @@ export default function CheckoutPage() {
               {initPoint && (
                 <a
                   href={initPoint}
-                  className="block w-full text-center bg-[#009ee3] hover:bg-[#0087c8] text-white font-semibold text-[13px] py-4 transition-colors"
+                  className="rounded-md block w-full text-center bg-[#009ee3] hover:bg-[#0087c8] text-white font-semibold text-[13px] py-4 transition-colors"
                 >
                   Pagar com MercadoPago
                 </a>
@@ -181,7 +181,7 @@ export default function CheckoutPage() {
 
         {/* Resumo */}
         <div className="lg:col-span-1">
-          <div className="bg-[#F2EAE0] p-7 sticky top-24">
+          <div className="rounded-md bg-[#F2EAE0] p-7 sticky top-24">
             <h2
               className="font-semibold text-[1.1rem] text-[#1C1410] mb-5"
               style={{ fontFamily: "var(--font-playfair)" }}

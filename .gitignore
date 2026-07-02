@@ -36,6 +36,11 @@ yarn-error.log*
 # vercel
 .vercel
 
+# local tooling state
+.claude/
+.gemini/
+.impeccable/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { X, Minus, Plus, ShoppingBag } from "lucide-react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
-import { Separator } from "@/components/ui/separator";
 import { useCartStore } from "@/lib/cart-store";
 
 type Props = { open: boolean; onClose: () => void };
@@ -84,11 +83,11 @@ export default function CartDrawer({ open, onClose }: Props) {
                 </span>
               </div>
               <Link href="/checkout" onClick={onClose}
-                className="block w-full text-center bg-[#1C1410] hover:bg-[#8B2E4A] text-white text-xs tracking-[0.15em] uppercase font-medium py-4 transition-colors">
+                className="rounded-md block w-full text-center bg-[#1C1410] hover:bg-[#8B2E4A] text-white text-xs tracking-[0.15em] uppercase font-medium py-4 transition-colors">
                 Finalizar pedido
               </Link>
               <Link href="/carrinho" onClick={onClose}
-                className="block w-full text-center border border-[#E2D5C8] hover:border-[#8B2E4A] text-[#7A6458] hover:text-[#8B2E4A] text-xs tracking-[0.15em] uppercase font-medium py-3 transition-colors">
+                className="rounded-md block w-full text-center border border-[#E2D5C8] hover:border-[#8B2E4A] text-[#7A6458] hover:text-[#8B2E4A] text-xs tracking-[0.15em] uppercase font-medium py-3 transition-colors">
                 Ver carrinho
               </Link>
             </div>

@@ -25,7 +25,7 @@ export default function CarrinhoPage() {
         <p className="text-[#7A6458] text-[14px] mb-9">Adicione produtos para continuar.</p>
         <Link
           href="/loja"
-          className="inline-block bg-[#1C1410] hover:bg-[#8B2E4A] text-white text-[11px] tracking-[0.15em] uppercase font-medium px-9 py-3.5 transition-colors duration-300"
+          className="rounded-md inline-block bg-[#1C1410] hover:bg-[#8B2E4A] text-white text-[11px] tracking-[0.15em] uppercase font-medium px-9 py-3.5 transition-colors duration-300"
         >
           Ir para a loja
         </Link>
@@ -46,8 +46,8 @@ export default function CarrinhoPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
         <div className="lg:col-span-2 space-y-5">
           {items.map((item) => (
-            <div key={`${item.id}-${item.tamanho}`} className="flex gap-4 bg-white border border-[#E0D3C6] p-4">
-              <div className="relative w-20 h-24 bg-[#F2EAE0] shrink-0">
+            <div key={`${item.id}-${item.tamanho}`} className="rounded-md flex gap-4 bg-white border border-[#E0D3C6] p-4">
+              <div className="relative w-20 h-24 rounded bg-[#F2EAE0] shrink-0 overflow-hidden">
                 {item.imagem ? (
                   <Image src={item.imagem} alt={item.nome} fill className="object-cover" />
                 ) : (
@@ -78,14 +78,14 @@ export default function CarrinhoPage() {
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => updateQuantity(item.id, item.tamanho, item.quantidade - 1)}
-                      className="w-7 h-7 border border-[#E0D3C6] hover:border-[#8B2E4A] flex items-center justify-center text-[#7A6458] transition-colors"
+                      className="rounded w-7 h-7 border border-[#E0D3C6] hover:border-[#8B2E4A] flex items-center justify-center text-[#7A6458] transition-colors"
                     >
                       <Minus size={12} />
                     </button>
                     <span className="w-6 text-center text-[13px] font-medium">{item.quantidade}</span>
                     <button
                       onClick={() => updateQuantity(item.id, item.tamanho, item.quantidade + 1)}
-                      className="w-7 h-7 border border-[#E0D3C6] hover:border-[#8B2E4A] flex items-center justify-center text-[#7A6458] transition-colors"
+                      className="rounded w-7 h-7 border border-[#E0D3C6] hover:border-[#8B2E4A] flex items-center justify-center text-[#7A6458] transition-colors"
                     >
                       <Plus size={12} />
                     </button>
@@ -100,7 +100,7 @@ export default function CarrinhoPage() {
         </div>
 
         <div className="lg:col-span-1">
-          <div className="bg-[#F2EAE0] p-7 sticky top-24">
+          <div className="rounded-md bg-[#F2EAE0] p-7 sticky top-24">
             <h2
               className="font-semibold text-[1.1rem] text-[#1C1410] mb-5"
               style={{ fontFamily: "var(--font-playfair)" }}
@@ -129,7 +129,7 @@ export default function CarrinhoPage() {
 
             <Link
               href="/checkout"
-              className="block w-full text-center bg-[#1C1410] hover:bg-[#8B2E4A] text-white text-[11px] tracking-[0.15em] uppercase font-medium py-4 transition-colors duration-300"
+              className="rounded-md block w-full text-center bg-[#1C1410] hover:bg-[#8B2E4A] text-white text-[11px] tracking-[0.15em] uppercase font-medium py-4 transition-colors duration-300"
             >
               Finalizar pedido
             </Link>
