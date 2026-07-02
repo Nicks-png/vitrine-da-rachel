@@ -2,53 +2,64 @@
 
 import { useEffect, useState } from "react";
 import { useParams, notFound } from "next/navigation";
+import Link from "next/link";
 import Image from "next/image";
 import { ShoppingBag, ChevronLeft, ChevronRight } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { useCartStore } from "@/lib/cart-store";
 import { createClient } from "@/lib/supabase";
+import { mockProdutos } from "@/lib/mock-products";
 import type { Produto } from "@/lib/types";
 import { toast } from "sonner";
 
+function fmt(v: number) {
+  return "R$ " + v.toFixed(2).replace(".", ",");
+}
+
 export default function ProdutoPage() {
   const params = useParams<{ slug: string }>();
-  const [produto, setProduto] = useState<Produto | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [produto, setProduto] = useState<Produto | null | undefined>(undefined);
   const [tamanho, setTamanho] = useState<string>("");
   const [imgIdx, setImgIdx] = useState(0);
   const addItem = useCartStore((s) => s.addItem);
 
   useEffect(() => {
     async function load() {
-      const supabase = createClient();
-      const { data } = await supabase
-        .from("produtos")
-        .select("*")
-        .eq("slug", params.slug)
-        .eq("ativo", true)
-        .single();
-      setProduto(data as Produto | null);
-      setLoading(false);
+      try {
+        const supabase = createClient();
+        const { data, error } = await supabase
+          .from("produtos")
+          .select("*")
+          .eq("slug", params.slug)
+          .eq("ativo", true)
+          .single();
+        if (error || !data) {
+          setProduto(mockProdutos.find((p) => p.slug === params.slug) ?? null);
+          return;
+        }
+        setProduto(data as Produto);
+      } catch {
+        setProduto(mockProdutos.find((p) => p.slug === params.slug) ?? null);
+      }
     }
     load();
   }, [params.slug]);
 
-  if (loading) {
+  if (produto === undefined) {
     return (
-      <div className="max-w-6xl mx-auto px-4 py-20 flex items-center justify-center">
-        <div className="w-8 h-8 rounded-full border-2 border-[#F4A7B9] border-t-transparent animate-spin" />
+      <div className="max-w-6xl mx-auto px-8 py-32 flex items-center justify-center">
+        <div className="w-7 h-7 rounded-full border-2 border-[#8B2E4A] border-t-transparent animate-spin" />
       </div>
     );
   }
 
-  if (!produto) {
+  if (produto === null) {
     notFound();
   }
 
-  const preco = produto.preco_promocional && produto.preco_promocional < produto.preco
-    ? produto.preco_promocional
-    : produto.preco;
+  const precoFinal =
+    produto.preco_promocional && produto.preco_promocional < produto.preco
+      ? produto.preco_promocional
+      : produto.preco;
 
   const temPromocao = produto.preco_promocional && produto.preco_promocional < produto.preco;
 
@@ -60,7 +71,7 @@ export default function ProdutoPage() {
     addItem({
       id: produto!.id,
       nome: produto!.nome,
-      preco,
+      preco: precoFinal,
       imagem: produto!.imagens[0] ?? "",
       slug: produto!.slug,
       tamanho: tamanho || undefined,
@@ -69,11 +80,19 @@ export default function ProdutoPage() {
   }
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-10">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+    <div className="max-w-6xl mx-auto px-8 py-14">
+      <div className="text-[10px] tracking-[0.15em] uppercase text-[#7A6458] mb-10 flex items-center gap-2">
+        <Link href="/loja" className="hover:text-[#1C1410] transition-colors">Loja</Link>
+        <span>/</span>
+        <Link href={`/loja?categoria=${encodeURIComponent(produto.categoria)}`} className="hover:text-[#1C1410] transition-colors">
+          {produto.categoria}
+        </Link>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-14">
         {/* Galeria */}
         <div className="space-y-3">
-          <div className="relative aspect-square rounded-2xl overflow-hidden bg-[#F5ECD7]">
+          <div className="relative aspect-[3/4] bg-[#F2EAE0] overflow-hidden">
             {produto.imagens[imgIdx] ? (
               <Image
                 src={produto.imagens[imgIdx]}
@@ -84,7 +103,7 @@ export default function ProdutoPage() {
               />
             ) : (
               <div className="w-full h-full flex items-center justify-center">
-                <ShoppingBag size={64} className="text-[#F4A7B9]/30" />
+                <ShoppingBag size={56} strokeWidth={1} className="text-[#E0D3C6]" />
               </div>
             )}
 
@@ -92,28 +111,30 @@ export default function ProdutoPage() {
               <>
                 <button
                   onClick={() => setImgIdx((i) => (i - 1 + produto.imagens.length) % produto.imagens.length)}
-                  className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 rounded-full p-1.5 shadow hover:bg-white transition-colors"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 bg-white/85 hover:bg-white p-2 transition-colors"
+                  aria-label="Imagem anterior"
                 >
-                  <ChevronLeft size={18} />
+                  <ChevronLeft size={16} />
                 </button>
                 <button
                   onClick={() => setImgIdx((i) => (i + 1) % produto.imagens.length)}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 rounded-full p-1.5 shadow hover:bg-white transition-colors"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 bg-white/85 hover:bg-white p-2 transition-colors"
+                  aria-label="Próxima imagem"
                 >
-                  <ChevronRight size={18} />
+                  <ChevronRight size={16} />
                 </button>
               </>
             )}
           </div>
 
           {produto.imagens.length > 1 && (
-            <div className="flex gap-2 overflow-x-auto pb-1">
+            <div className="flex gap-2.5 overflow-x-auto pb-1">
               {produto.imagens.map((img, i) => (
                 <button
                   key={i}
                   onClick={() => setImgIdx(i)}
-                  className={`relative shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-colors ${
-                    i === imgIdx ? "border-[#F4A7B9]" : "border-transparent"
+                  className={`relative shrink-0 w-16 h-20 overflow-hidden border transition-colors ${
+                    i === imgIdx ? "border-[#8B2E4A]" : "border-transparent opacity-70 hover:opacity-100"
                   }`}
                 >
                   <Image src={img} alt="" fill className="object-cover" />
@@ -125,42 +146,43 @@ export default function ProdutoPage() {
 
         {/* Detalhes */}
         <div className="flex flex-col">
-          <p className="text-[#F4A7B9] text-xs font-medium uppercase tracking-widest mb-2">
+          <p className="text-[9px] tracking-[0.4em] uppercase text-[#B8956A] font-medium mb-3">
             {produto.categoria}
           </p>
-          <h1 className="font-heading text-3xl font-bold text-[#2D2D2D] mb-4">
+          <h1
+            className="text-[2.1rem] font-semibold text-[#1C1410] leading-[1.1] mb-5"
+            style={{ fontFamily: "var(--font-playfair)" }}
+          >
             {produto.nome}
           </h1>
 
-          <div className="flex items-baseline gap-3 mb-6">
-            <span className="text-3xl font-bold text-[#F4A7B9]">
-              R$ {preco.toFixed(2).replace(".", ",")}
-            </span>
+          <div className="flex items-baseline gap-3 mb-7">
+            <span className="text-2xl font-semibold text-[#8B2E4A]">{fmt(precoFinal)}</span>
             {temPromocao && (
-              <span className="text-lg text-muted-foreground line-through">
-                R$ {produto.preco.toFixed(2).replace(".", ",")}
-              </span>
+              <span className="text-sm text-[#7A6458]/70 line-through">{fmt(produto.preco)}</span>
             )}
           </div>
 
           {produto.descricao && (
-            <p className="text-[#2D2D2D]/70 text-sm leading-relaxed mb-6">
+            <p className="text-[#7A6458] text-[14px] leading-[1.85] mb-8 max-w-md">
               {produto.descricao}
             </p>
           )}
 
           {produto.tamanhos.length > 0 && (
-            <div className="mb-6">
-              <p className="text-sm font-medium text-[#2D2D2D] mb-2">Tamanho</p>
+            <div className="mb-8">
+              <p className="text-[10px] tracking-[0.2em] uppercase text-[#1C1410] font-medium mb-3">
+                Tamanho
+              </p>
               <div className="flex gap-2 flex-wrap">
                 {produto.tamanhos.map((t) => (
                   <button
                     key={t}
                     onClick={() => setTamanho(t)}
-                    className={`min-w-[44px] h-10 px-3 rounded-lg border-2 text-sm font-medium transition-colors ${
+                    className={`min-w-[44px] h-10 px-3 border text-[13px] font-medium transition-colors ${
                       tamanho === t
-                        ? "border-[#F4A7B9] bg-[#F4A7B9] text-white"
-                        : "border-[#F5ECD7] text-[#2D2D2D] hover:border-[#F4A7B9]"
+                        ? "border-[#1C1410] bg-[#1C1410] text-white"
+                        : "border-[#E0D3C6] text-[#1C1410] hover:border-[#8B2E4A]"
                     }`}
                   >
                     {t}
@@ -170,24 +192,26 @@ export default function ProdutoPage() {
             </div>
           )}
 
-          <div className="flex items-center gap-3 mt-auto">
+          <div className="mb-6">
             {produto.estoque > 0 ? (
-              <Badge variant="secondary" className="text-emerald-700 bg-emerald-50">
-                Em estoque ({produto.estoque})
-              </Badge>
+              <span className="text-[10px] tracking-[0.15em] uppercase text-emerald-700 font-medium">
+                Em estoque · {produto.estoque} {produto.estoque === 1 ? "peça" : "peças"}
+              </span>
             ) : (
-              <Badge variant="secondary">Esgotado</Badge>
+              <span className="text-[10px] tracking-[0.15em] uppercase text-[#7A6458] font-medium">
+                Esgotado
+              </span>
             )}
           </div>
 
-          <Button
+          <button
             onClick={handleAdd}
             disabled={produto.estoque === 0}
-            className="mt-4 bg-[#F4A7B9] hover:bg-[#e8919e] text-white h-12 text-base rounded-xl"
+            className="mt-auto w-full flex items-center justify-center gap-2.5 bg-[#1C1410] hover:bg-[#8B2E4A] disabled:opacity-40 disabled:pointer-events-none text-white text-[11px] tracking-[0.15em] uppercase font-medium py-4 transition-colors duration-300"
           >
-            <ShoppingBag size={18} className="mr-2" />
+            <ShoppingBag size={15} />
             Adicionar ao carrinho
-          </Button>
+          </button>
         </div>
       </div>
     </div>

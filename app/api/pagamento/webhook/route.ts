@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { payment } from "@/lib/mercadopago";
-import { createServiceClient } from "@/lib/supabase";
+import { createServiceClient } from "@/lib/supabase-server";
 
 export async function POST(req: NextRequest) {
   try {

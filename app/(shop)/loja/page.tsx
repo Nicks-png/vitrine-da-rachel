@@ -1,4 +1,5 @@
-import { createServerSupabaseClient } from "@/lib/supabase";
+import { createServerSupabaseClient } from "@/lib/supabase-server";
+import { mockProdutos } from "@/lib/mock-products";
 import ProductCard from "@/components/shop/ProductCard";
 import type { Produto } from "@/lib/types";
 
@@ -17,10 +18,19 @@ async function getProdutos(categoria?: string): Promise<Produto[]> {
       query = query.eq("categoria", categoria);
     }
 
-    const { data } = await query;
-    return (data as Produto[]) ?? [];
+    const { data, error } = await query;
+    if (error || !data?.length) {
+      const source = mockProdutos;
+      return categoria && categoria !== "Todos"
+        ? source.filter((p) => p.categoria === categoria)
+        : source;
+    }
+    return data as Produto[];
   } catch {
-    return [];
+    const source = mockProdutos;
+    return categoria && categoria !== "Todos"
+      ? source.filter((p) => p.categoria === categoria)
+      : source;
   }
 }
 
@@ -34,34 +44,43 @@ export default async function LojaPage({ searchParams }: Props) {
   const categoriaAtiva = categoria ?? "Todos";
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-10">
-      <div className="mb-8">
-        <h1 className="font-heading text-3xl font-bold text-[#2D2D2D] mb-6">Loja</h1>
-
-        <div className="flex gap-2 flex-wrap">
-          {CATEGORIAS.map((cat) => (
-            <a
-              key={cat}
-              href={cat === "Todos" ? "/loja" : `/loja?categoria=${encodeURIComponent(cat)}`}
-              className={`px-4 py-1.5 rounded-full text-sm font-medium border transition-colors ${
-                categoriaAtiva === cat
-                  ? "bg-[#F4A7B9] text-white border-[#F4A7B9]"
-                  : "bg-white text-[#2D2D2D] border-[#F5ECD7] hover:border-[#F4A7B9]"
-              }`}
-            >
-              {cat}
-            </a>
-          ))}
+    <div className="max-w-6xl mx-auto px-8 py-16">
+      {/* Topo */}
+      <div className="mb-12">
+        <p className="text-[9px] tracking-[0.4em] uppercase text-[#B8956A] mb-2">Bazar</p>
+        <div className="flex items-end justify-between">
+          <h1 className="font-heading text-[2.2rem] font-semibold text-[#1C1410]">
+            {categoriaAtiva === "Todos" ? "Todos os produtos" : categoriaAtiva}
+          </h1>
+          <span className="text-[12px] text-[#7A6458]">{produtos.length} peças</span>
         </div>
       </div>
 
+      {/* Filtros */}
+      <div className="flex gap-2.5 mb-12 flex-wrap">
+        {CATEGORIAS.map((cat) => (
+          <a
+            key={cat}
+            href={cat === "Todos" ? "/loja" : `/loja?categoria=${encodeURIComponent(cat)}`}
+            className={`text-[9.5px] tracking-[0.2em] uppercase px-6 py-2.5 border transition-colors duration-300 ${
+              categoriaAtiva === cat
+                ? "bg-[#1C1410] text-white border-[#1C1410]"
+                : "bg-transparent text-[#7A6458] border-[#E0D3C6] hover:border-[#1C1410] hover:text-[#1C1410]"
+            }`}
+          >
+            {cat}
+          </a>
+        ))}
+      </div>
+
+      {/* Grid */}
       {produtos.length === 0 ? (
-        <div className="text-center py-20 text-muted-foreground">
-          <p className="text-lg">Nenhum produto encontrado.</p>
-          <p className="text-sm mt-2">Volte em breve para novidades!</p>
+        <div className="text-center py-28 text-[#7A6458]">
+          <p className="font-heading text-[1.8rem] text-[#1C1410] mb-3">Nenhuma peça encontrada</p>
+          <p className="text-[13px]">Volte em breve — novas peças chegando.</p>
         </div>
       ) : (
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
           {produtos.map((produto) => (
             <ProductCard key={produto.id} produto={produto} />
           ))}

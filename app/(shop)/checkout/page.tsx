@@ -1,22 +1,39 @@
 "use client";
 
 import { useState } from "react";
-import { useCartStore } from "@/lib/cart-store";
-import { Button } from "@/components/ui/button";
-import { buttonVariants } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Separator } from "@/components/ui/separator";
-import { ShoppingBag } from "lucide-react";
 import Link from "next/link";
+import { ShoppingBag } from "lucide-react";
+import { useCartStore } from "@/lib/cart-store";
 import { toast } from "sonner";
-import { cn } from "@/lib/utils";
+
+function fmt(v: number) {
+  return "R$ " + v.toFixed(2).replace(".", ",");
+}
 
 type Cliente = {
   nome: string;
   email: string;
   telefone: string;
 };
+
+function Field({
+  id,
+  label,
+  ...props
+}: React.InputHTMLAttributes<HTMLInputElement> & { id: string; label: string }) {
+  return (
+    <div className="space-y-2">
+      <label htmlFor={id} className="block text-[10px] tracking-[0.2em] uppercase text-[#7A6458] font-medium">
+        {label}
+      </label>
+      <input
+        id={id}
+        {...props}
+        className="w-full border border-[#E0D3C6] focus:border-[#8B2E4A] focus:outline-none bg-white px-4 py-3 text-[14px] text-[#1C1410] placeholder:text-[#B8A99B] transition-colors"
+      />
+    </div>
+  );
+}
 
 export default function CheckoutPage() {
   const { items, total } = useCartStore();
@@ -31,13 +48,18 @@ export default function CheckoutPage() {
 
   if (items.length === 0) {
     return (
-      <div className="max-w-2xl mx-auto px-4 py-20 text-center">
-        <ShoppingBag size={56} className="text-[#F4A7B9]/30 mx-auto mb-4" />
-        <h1 className="font-heading text-2xl font-bold text-[#2D2D2D] mb-2">Carrinho vazio</h1>
-        <p className="text-muted-foreground mb-8">Adicione produtos antes de finalizar.</p>
+      <div className="max-w-2xl mx-auto px-8 py-28 text-center">
+        <ShoppingBag size={44} strokeWidth={1} className="text-[#E0D3C6] mx-auto mb-6" />
+        <h1
+          className="text-[1.8rem] font-semibold text-[#1C1410] mb-3"
+          style={{ fontFamily: "var(--font-playfair)" }}
+        >
+          Carrinho vazio
+        </h1>
+        <p className="text-[#7A6458] text-[14px] mb-9">Adicione produtos antes de finalizar.</p>
         <Link
           href="/loja"
-          className={cn(buttonVariants(), "bg-[#F4A7B9] hover:bg-[#e8919e] text-white border-0")}
+          className="inline-block bg-[#1C1410] hover:bg-[#8B2E4A] text-white text-[11px] tracking-[0.15em] uppercase font-medium px-9 py-3.5 transition-colors duration-300"
         >
           Ir para a loja
         </Link>
@@ -70,78 +92,86 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-10">
-      <h1 className="font-heading text-3xl font-bold text-[#2D2D2D] mb-8">Checkout</h1>
+    <div className="max-w-4xl mx-auto px-8 py-14">
+      <p className="text-[9px] tracking-[0.4em] uppercase text-[#B8956A] font-medium mb-2">Finalizar</p>
+      <h1
+        className="text-[2rem] font-semibold text-[#1C1410] mb-10"
+        style={{ fontFamily: "var(--font-playfair)" }}
+      >
+        Checkout
+      </h1>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
         {/* Formulário / Pagamento */}
         <div className="lg:col-span-2">
           {etapa === "dados" ? (
-            <form onSubmit={handleContinuar} className="bg-white rounded-xl border border-[#F5ECD7] p-6 space-y-4">
-              <h2 className="font-heading font-semibold text-lg text-[#2D2D2D]">Seus dados</h2>
-              <Separator />
+            <form onSubmit={handleContinuar} className="bg-white border border-[#E0D3C6] p-7 space-y-5">
+              <h2
+                className="font-semibold text-[1.1rem] text-[#1C1410] pb-5 border-b border-[#E0D3C6]"
+                style={{ fontFamily: "var(--font-playfair)" }}
+              >
+                Seus dados
+              </h2>
 
-              <div className="space-y-2">
-                <Label htmlFor="nome">Nome completo</Label>
-                <Input
-                  id="nome"
-                  value={cliente.nome}
-                  onChange={(e) => setCliente({ ...cliente, nome: e.target.value })}
-                  placeholder="Seu nome"
-                  required
-                />
-              </div>
+              <Field
+                id="nome"
+                label="Nome completo"
+                value={cliente.nome}
+                onChange={(e) => setCliente({ ...cliente, nome: e.target.value })}
+                placeholder="Seu nome"
+                required
+              />
 
-              <div className="space-y-2">
-                <Label htmlFor="email">E-mail</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  value={cliente.email}
-                  onChange={(e) => setCliente({ ...cliente, email: e.target.value })}
-                  placeholder="seu@email.com"
-                  required
-                />
-              </div>
+              <Field
+                id="email"
+                label="E-mail"
+                type="email"
+                value={cliente.email}
+                onChange={(e) => setCliente({ ...cliente, email: e.target.value })}
+                placeholder="seu@email.com"
+                required
+              />
 
-              <div className="space-y-2">
-                <Label htmlFor="telefone">Telefone / WhatsApp</Label>
-                <Input
-                  id="telefone"
-                  type="tel"
-                  value={cliente.telefone}
-                  onChange={(e) => setCliente({ ...cliente, telefone: e.target.value })}
-                  placeholder="(11) 99999-9999"
-                  required
-                />
-              </div>
+              <Field
+                id="telefone"
+                label="Telefone / WhatsApp"
+                type="tel"
+                value={cliente.telefone}
+                onChange={(e) => setCliente({ ...cliente, telefone: e.target.value })}
+                placeholder="(11) 99999-9999"
+                required
+              />
 
-              <Button
+              <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-[#F4A7B9] hover:bg-[#e8919e] text-white border-0 h-12 text-base mt-2"
+                className="w-full bg-[#1C1410] hover:bg-[#8B2E4A] disabled:opacity-50 text-white text-[11px] tracking-[0.15em] uppercase font-medium py-4 mt-2 transition-colors duration-300"
               >
                 {loading ? "Processando..." : "Continuar para pagamento"}
-              </Button>
+              </button>
             </form>
           ) : (
-            <div className="bg-white rounded-xl border border-[#F5ECD7] p-6">
-              <h2 className="font-heading font-semibold text-lg text-[#2D2D2D] mb-4">Pagamento</h2>
-              <Separator className="mb-6" />
-              <p className="text-sm text-muted-foreground mb-6">
+            <div className="bg-white border border-[#E0D3C6] p-7">
+              <h2
+                className="font-semibold text-[1.1rem] text-[#1C1410] pb-5 mb-6 border-b border-[#E0D3C6]"
+                style={{ fontFamily: "var(--font-playfair)" }}
+              >
+                Pagamento
+              </h2>
+              <p className="text-[13.5px] text-[#7A6458] leading-[1.8] mb-7">
                 Clique abaixo para ser redirecionado ao MercadoPago e concluir seu pagamento com segurança.
               </p>
               {initPoint && (
                 <a
                   href={initPoint}
-                  className="block w-full text-center bg-[#009ee3] hover:bg-[#0087c8] text-white font-semibold py-3.5 rounded-xl transition-colors"
+                  className="block w-full text-center bg-[#009ee3] hover:bg-[#0087c8] text-white font-semibold text-[13px] py-4 transition-colors"
                 >
                   Pagar com MercadoPago
                 </a>
               )}
               <button
                 onClick={() => setEtapa("dados")}
-                className="mt-4 text-sm text-muted-foreground hover:text-[#2D2D2D] transition-colors w-full text-center"
+                className="mt-5 text-[11px] tracking-[0.1em] uppercase text-[#7A6458] hover:text-[#1C1410] transition-colors w-full text-center"
               >
                 ← Voltar e editar dados
               </button>
@@ -151,24 +181,30 @@ export default function CheckoutPage() {
 
         {/* Resumo */}
         <div className="lg:col-span-1">
-          <div className="bg-[#F5ECD7]/50 rounded-xl p-6 sticky top-24">
-            <h2 className="font-heading font-semibold text-lg text-[#2D2D2D] mb-4">Resumo</h2>
-            <Separator className="mb-4" />
+          <div className="bg-[#F2EAE0] p-7 sticky top-24">
+            <h2
+              className="font-semibold text-[1.1rem] text-[#1C1410] mb-5"
+              style={{ fontFamily: "var(--font-playfair)" }}
+            >
+              Resumo
+            </h2>
 
-            <div className="space-y-2 text-sm mb-4">
+            <div className="space-y-2.5 text-[13px] mb-5 pb-5 border-b border-[#E0D3C6]">
               {items.map((item) => (
-                <div key={`${item.id}-${item.tamanho}`} className="flex justify-between text-muted-foreground">
+                <div key={`${item.id}-${item.tamanho}`} className="flex justify-between text-[#7A6458]">
                   <span className="truncate max-w-[150px]">{item.nome} ×{item.quantidade}</span>
-                  <span>R$ {(item.preco * item.quantidade).toFixed(2).replace(".", ",")}</span>
+                  <span>{fmt(item.preco * item.quantidade)}</span>
                 </div>
               ))}
             </div>
 
-            <Separator className="mb-4" />
-            <div className="flex justify-between font-bold text-[#2D2D2D]">
-              <span>Total</span>
-              <span className="text-[#F4A7B9] text-lg">
-                R$ {total().toFixed(2).replace(".", ",")}
+            <div className="flex justify-between items-baseline">
+              <span className="text-[10px] tracking-[0.15em] uppercase text-[#7A6458]">Total</span>
+              <span
+                className="font-semibold text-xl text-[#1C1410]"
+                style={{ fontFamily: "var(--font-playfair)" }}
+              >
+                {fmt(total())}
               </span>
             </div>
           </div>

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { preference } from "@/lib/mercadopago";
-import { createServiceClient } from "@/lib/supabase";
+import { createServiceClient } from "@/lib/supabase-server";
 import type { CartItem } from "@/lib/cart-store";
 
 type Body = {
