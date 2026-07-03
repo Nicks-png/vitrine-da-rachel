@@ -26,8 +26,17 @@ export default async function HomePage() {
     <>
       {/* Hero */}
       <section className="relative h-[460px] sm:h-[520px] md:h-[640px] overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1600&q=80"
-          alt="Moda feminina selecionada por Rachel Dias" className="absolute inset-0 w-full h-full object-cover" />
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster="https://images.pexels.com/videos/7669196/pexels-photo-7669196.jpeg?w=1600"
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="https://videos.pexels.com/video-files/7669196/7669196-sd_960_506_25fps.mp4" type="video/mp4" />
+        </video>
         <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/25 to-transparent sm:bg-gradient-to-r sm:from-ink/75 sm:via-ink/35 sm:to-transparent" />
         <div className="relative h-full max-w-6xl mx-auto px-5 sm:px-8 flex items-end sm:items-center pb-8 sm:pb-0">
           <div className="max-w-md">
