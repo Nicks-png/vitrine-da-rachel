@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ShoppingBag, Menu, X } from "lucide-react";
+import { ShoppingBag, Menu, X, LayoutDashboard } from "lucide-react";
 import { useState, useSyncExternalStore } from "react";
 import { useCartStore } from "@/lib/cart-store";
 import CartDrawer from "@/components/shop/CartDrawer";
@@ -49,8 +49,18 @@ export default function Header() {
             </span>
           </Link>
 
-          {/* Direita: carrinho */}
-          <div className="flex items-center justify-end md:flex-1">
+          {/* Direita: admin (temporário, só para demonstração) + carrinho */}
+          <div className="flex items-center justify-end gap-4 md:flex-1">
+            {/* TODO: remover este link antes do lançamento — só para a Rachel conhecer a área admin */}
+            <Link
+              href="/admin/login"
+              className="flex items-center gap-1.5 text-muted-foreground hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
+              aria-label="Área administrativa"
+              title="Área administrativa (demonstração)"
+            >
+              <LayoutDashboard size={18} />
+              <span className="hidden md:inline text-[10px] tracking-[0.15em] uppercase font-medium">Admin</span>
+            </Link>
             <button
               onClick={() => setCartOpen(true)}
               className="relative flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
