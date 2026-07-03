@@ -4,7 +4,7 @@ import { Phone, ExternalLink } from "lucide-react";
 export default function Footer() {
   return (
     <footer className="bg-ink text-background/50 mt-auto">
-      <div className="max-w-6xl mx-auto px-8 py-16 grid grid-cols-1 md:grid-cols-3 gap-12">
+      <div className="max-w-6xl mx-auto px-5 md:px-8 py-12 md:py-16 grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12">
         <div>
           <p className="font-heading uppercase text-background text-[1.1rem] tracking-[0.04em] mb-2 leading-none">
             Vitrine da Rachel
@@ -51,7 +51,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-background/10 py-6 px-8 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-background/25">
+      <div className="border-t border-background/10 py-6 px-5 md:px-8 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-background/25">
         <span>© {new Date().getFullYear()} Vitrine da Rachel</span>
         <span className="italic">
           &ldquo;Curado com amor.&rdquo;

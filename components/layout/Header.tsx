@@ -17,35 +17,40 @@ export default function Header() {
   return (
     <>
       <header className="sticky top-0 z-40 bg-background/95 backdrop-blur-md border-b border-border">
-        <div className="w-full px-10 h-[4.75rem] flex items-center">
+        <div className="w-full px-5 md:px-10 h-[4.5rem] md:h-[4.75rem] grid grid-cols-[auto_1fr_auto] md:flex md:items-center items-center gap-2">
 
-          {/* Nav esquerda */}
-          <nav className="hidden md:flex items-center gap-10 flex-1">
-            {[
-              { label: "Loja", href: "/loja" },
-              { label: "Roupas", href: "/loja?categoria=Roupas" },
-              { label: "Acessórios", href: "/loja?categoria=Acessórios" },
-            ].map(({ label, href }) => (
-              <Link key={href} href={href}
-                className="text-[10.5px] tracking-[0.18em] uppercase font-medium text-muted-foreground hover:text-foreground transition-colors duration-300 relative group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm">
-                {label}
-                <span className="absolute -bottom-px left-0 h-px w-0 bg-primary group-hover:w-full transition-[width] duration-500" />
-              </Link>
-            ))}
-          </nav>
+          {/* Esquerda: nav no desktop, hamburguer no mobile */}
+          <div className="flex items-center md:flex-1">
+            <nav className="hidden md:flex items-center gap-10">
+              {[
+                { label: "Loja", href: "/loja" },
+                { label: "Roupas", href: "/loja?categoria=Roupas" },
+                { label: "Acessórios", href: "/loja?categoria=Acessórios" },
+              ].map(({ label, href }) => (
+                <Link key={href} href={href}
+                  className="text-[10.5px] tracking-[0.18em] uppercase font-medium text-muted-foreground hover:text-foreground transition-colors duration-300 relative group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm">
+                  {label}
+                  <span className="absolute -bottom-px left-0 h-px w-0 bg-primary group-hover:w-full transition-[width] duration-500" />
+                </Link>
+              ))}
+            </nav>
+            <button className="md:hidden p-1.5 -ml-1.5 text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu">
+              {menuOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
 
-          {/* Logo — centro */}
-          <Link href="/" className="absolute left-1/2 -translate-x-1/2 text-center group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm">
-            <span className="block font-heading uppercase text-[1.2rem] text-foreground tracking-[0.04em] whitespace-nowrap leading-none">
+          {/* Logo — centro. Grid garante que nunca sobrepõe os ícones nas laterais, mesmo em telas estreitas. */}
+          <Link href="/" className="justify-self-center md:absolute md:left-1/2 md:-translate-x-1/2 text-center group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm">
+            <span className="block font-heading uppercase text-[0.95rem] md:text-[1.2rem] text-foreground tracking-[0.03em] md:tracking-[0.04em] whitespace-nowrap leading-none">
               Vitrine da Rachel
             </span>
-            <span className="block text-[8px] tracking-[0.32em] uppercase text-muted-foreground font-medium mt-1.5">
+            <span className="hidden sm:block text-[8px] tracking-[0.32em] uppercase text-muted-foreground font-medium mt-1.5">
               curadoria pessoal
             </span>
           </Link>
 
-          {/* Direita */}
-          <div className="flex items-center gap-3 flex-1 justify-end">
+          {/* Direita: carrinho */}
+          <div className="flex items-center justify-end md:flex-1">
             <button
               onClick={() => setCartOpen(true)}
               className="relative flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
@@ -58,14 +63,11 @@ export default function Header() {
                 </span>
               )}
             </button>
-            <button className="md:hidden p-1.5 text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm" onClick={() => setMenuOpen(!menuOpen)}>
-              {menuOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
           </div>
         </div>
 
         {menuOpen && (
-          <div className="md:hidden bg-background border-t border-border px-8 py-7 flex flex-col gap-6">
+          <div className="md:hidden bg-background border-t border-border px-5 py-7 flex flex-col gap-6">
             {[
               { label: "Loja", href: "/loja" },
               { label: "Roupas", href: "/loja?categoria=Roupas" },
