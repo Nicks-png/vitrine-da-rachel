@@ -41,14 +41,14 @@ export default async function HomePage() {
         <div className="relative h-full max-w-6xl mx-auto px-5 sm:px-8 flex items-end sm:items-center pb-8 sm:pb-0">
           <div className="max-w-md">
             <p className="text-[9px] sm:text-[10px] tracking-[0.3em] uppercase text-background/85 font-medium mb-3 sm:mb-5">
-              Bazar · Curadoria Pessoal
+              Pitaya Rosa · Curadoria Pessoal
             </p>
             <h1 className="text-[1.9rem] sm:text-4xl md:text-[3.1rem] font-semibold text-background leading-[1.15] sm:leading-[1.1] mb-4 sm:mb-6">
-              Cada peça tem uma história para contar.
+              Elegância sem exageros.
             </h1>
             <p className="text-background/80 text-[13px] sm:text-[14px] leading-[1.7] sm:leading-[1.8] mb-6 sm:mb-9 max-w-sm">
-              Rachel Dias seleciona pessoalmente cada item do bazar — roupas e acessórios femininos
-              com estilo, qualidade e preço justo. Nada aqui é por acaso.
+              Rachel Dias seleciona pessoalmente cada peça da Pitaya Rosa — roupas e acessórios femininos
+              versáteis e sofisticados, para o guarda-roupa inteligente da mulher contemporânea.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link href="/loja"
@@ -116,10 +116,16 @@ export default async function HomePage() {
             Vegetariana por convicção, gerente por dedicação, mãe por amor.
             Esse cuidado aparece em cada peça que escolho para você.
           </p>
-          <Link href="/loja"
-            className="rounded-md inline-block border border-background/20 hover:border-foil-gold text-background/80 hover:text-foil-gold text-[9px] tracking-[0.25em] uppercase font-medium px-9 md:px-12 py-3.5 md:py-4 transition-colors duration-400 focus-visible:outline-none focus-visible:outline-2 focus-visible:outline-background focus-visible:outline-offset-2">
-            Conhecer o bazar
-          </Link>
+          <div className="flex flex-wrap justify-center items-center gap-5 md:gap-7">
+            <Link href="/loja"
+              className="rounded-md inline-block border border-background/20 hover:border-foil-gold text-background/80 hover:text-foil-gold text-[9px] tracking-[0.25em] uppercase font-medium px-9 md:px-12 py-3.5 md:py-4 transition-colors duration-400 focus-visible:outline-none focus-visible:outline-2 focus-visible:outline-background focus-visible:outline-offset-2">
+              Conhecer o bazar
+            </Link>
+            <Link href="/sobre"
+              className="text-background/50 hover:text-foil-gold text-[9px] tracking-[0.25em] uppercase font-medium transition-colors duration-400 underline-offset-4 hover:underline focus-visible:outline-none focus-visible:outline-2 focus-visible:outline-background focus-visible:outline-offset-2 rounded-sm">
+              Conheça minha história →
+            </Link>
+          </div>
         </div>
       </section>
 

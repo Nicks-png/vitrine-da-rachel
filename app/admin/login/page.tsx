@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
+import Logo from "@/components/layout/Logo";
 
 export default function AdminLoginPage() {
   const router = useRouter();
@@ -31,11 +32,11 @@ export default function AdminLoginPage() {
   return (
     <>
       <Toaster richColors position="top-right" />
-      <div className="min-h-screen flex items-center justify-center bg-[#F5ECD7]/40 px-4">
-        <div className="w-full max-w-sm bg-white rounded-2xl border border-[#F5ECD7] shadow-sm p-8">
-          <h1 className="font-heading text-2xl font-bold text-[#2D2D2D] mb-1 text-center">
-            Vitrine da Rachel
-          </h1>
+      <div className="min-h-screen flex items-center justify-center bg-secondary/40 px-4">
+        <div className="w-full max-w-sm bg-white rounded-sm border border-border shadow-sm p-8">
+          <div className="flex justify-center mb-5">
+            <Logo variant="light" />
+          </div>
           <p className="text-sm text-muted-foreground text-center mb-8">Área administrativa</p>
 
           <form onSubmit={handleLogin} className="space-y-4">
@@ -66,7 +67,7 @@ export default function AdminLoginPage() {
             <Button
               type="submit"
               disabled={loading}
-              className="w-full bg-[#F4A7B9] hover:bg-[#e8919e] text-white h-11"
+              className="w-full bg-primary hover:bg-primary-hover text-primary-foreground h-11"
             >
               {loading ? "Entrando..." : "Entrar"}
             </Button>

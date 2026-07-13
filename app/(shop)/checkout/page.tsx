@@ -23,13 +23,13 @@ function Field({
 }: React.InputHTMLAttributes<HTMLInputElement> & { id: string; label: string }) {
   return (
     <div className="space-y-2">
-      <label htmlFor={id} className="block text-[10px] tracking-[0.2em] uppercase text-[#7A6458] font-medium">
+      <label htmlFor={id} className="block text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-medium">
         {label}
       </label>
       <input
         id={id}
         {...props}
-        className="rounded-md w-full border border-[#E0D3C6] focus:border-[#8B2E4A] focus:outline-none bg-white px-4 py-3 text-[14px] text-[#1C1410] placeholder:text-[#B8A99B] transition-colors"
+        className="rounded-md w-full border border-border focus:border-primary focus:outline-none bg-white px-4 py-3 text-[14px] text-foreground placeholder:text-muted-foreground/60 transition-colors"
       />
     </div>
   );
@@ -49,17 +49,14 @@ export default function CheckoutPage() {
   if (items.length === 0) {
     return (
       <div className="max-w-2xl mx-auto px-8 py-28 text-center">
-        <ShoppingBag size={44} strokeWidth={1} className="text-[#E0D3C6] mx-auto mb-6" />
-        <h1
-          className="text-[1.8rem] font-semibold text-[#1C1410] mb-3"
-          style={{ fontFamily: "var(--font-playfair)" }}
-        >
+        <ShoppingBag size={44} strokeWidth={1} className="text-border mx-auto mb-6" />
+        <h1 className="font-heading text-[1.8rem] font-semibold text-foreground mb-3">
           Carrinho vazio
         </h1>
-        <p className="text-[#7A6458] text-[14px] mb-9">Adicione produtos antes de finalizar.</p>
+        <p className="text-muted-foreground text-[14px] mb-9">Adicione produtos antes de finalizar.</p>
         <Link
           href="/loja"
-          className="rounded-md inline-block bg-[#1C1410] hover:bg-[#8B2E4A] text-white text-[11px] tracking-[0.15em] uppercase font-medium px-9 py-3.5 transition-colors duration-300"
+          className="rounded-md inline-block bg-primary hover:bg-primary-hover text-primary-foreground text-[11px] tracking-[0.15em] uppercase font-medium px-9 py-3.5 transition-colors duration-300"
         >
           Ir para a loja
         </Link>
@@ -93,11 +90,8 @@ export default function CheckoutPage() {
 
   return (
     <div className="max-w-4xl mx-auto px-8 py-14">
-      <p className="text-[9px] tracking-[0.4em] uppercase text-[#B8956A] font-medium mb-2">Finalizar</p>
-      <h1
-        className="text-[2rem] font-semibold text-[#1C1410] mb-10"
-        style={{ fontFamily: "var(--font-playfair)" }}
-      >
+      <p className="text-[9px] tracking-[0.4em] uppercase text-muted-foreground font-medium mb-2">Finalizar</p>
+      <h1 className="font-heading text-[2rem] font-semibold text-foreground mb-10">
         Checkout
       </h1>
 
@@ -105,11 +99,8 @@ export default function CheckoutPage() {
         {/* Formulário / Pagamento */}
         <div className="lg:col-span-2">
           {etapa === "dados" ? (
-            <form onSubmit={handleContinuar} className="rounded-md bg-white border border-[#E0D3C6] p-7 space-y-5">
-              <h2
-                className="font-semibold text-[1.1rem] text-[#1C1410] pb-5 border-b border-[#E0D3C6]"
-                style={{ fontFamily: "var(--font-playfair)" }}
-              >
+            <form onSubmit={handleContinuar} className="rounded-md bg-card border border-border p-7 space-y-5">
+              <h2 className="font-heading font-semibold text-[1.1rem] text-foreground pb-5 border-b border-border">
                 Seus dados
               </h2>
 
@@ -145,20 +136,17 @@ export default function CheckoutPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="rounded-md w-full bg-[#1C1410] hover:bg-[#8B2E4A] disabled:opacity-50 text-white text-[11px] tracking-[0.15em] uppercase font-medium py-4 mt-2 transition-colors duration-300"
+                className="rounded-md w-full bg-primary hover:bg-primary-hover disabled:opacity-50 text-primary-foreground text-[11px] tracking-[0.15em] uppercase font-medium py-4 mt-2 transition-colors duration-300"
               >
                 {loading ? "Processando..." : "Continuar para pagamento"}
               </button>
             </form>
           ) : (
-            <div className="rounded-md bg-white border border-[#E0D3C6] p-7">
-              <h2
-                className="font-semibold text-[1.1rem] text-[#1C1410] pb-5 mb-6 border-b border-[#E0D3C6]"
-                style={{ fontFamily: "var(--font-playfair)" }}
-              >
+            <div className="rounded-md bg-card border border-border p-7">
+              <h2 className="font-heading font-semibold text-[1.1rem] text-foreground pb-5 mb-6 border-b border-border">
                 Pagamento
               </h2>
-              <p className="text-[13.5px] text-[#7A6458] leading-[1.8] mb-7">
+              <p className="text-[13.5px] text-muted-foreground leading-[1.8] mb-7">
                 Clique abaixo para ser redirecionado ao MercadoPago e concluir seu pagamento com segurança.
               </p>
               {initPoint && (
@@ -171,7 +159,7 @@ export default function CheckoutPage() {
               )}
               <button
                 onClick={() => setEtapa("dados")}
-                className="mt-5 text-[11px] tracking-[0.1em] uppercase text-[#7A6458] hover:text-[#1C1410] transition-colors w-full text-center"
+                className="mt-5 text-[11px] tracking-[0.1em] uppercase text-muted-foreground hover:text-foreground transition-colors w-full text-center"
               >
                 ← Voltar e editar dados
               </button>
@@ -181,17 +169,14 @@ export default function CheckoutPage() {
 
         {/* Resumo */}
         <div className="lg:col-span-1">
-          <div className="rounded-md bg-[#F2EAE0] p-7 sticky top-24">
-            <h2
-              className="font-semibold text-[1.1rem] text-[#1C1410] mb-5"
-              style={{ fontFamily: "var(--font-playfair)" }}
-            >
+          <div className="rounded-md bg-muted p-7 sticky top-24">
+            <h2 className="font-heading font-semibold text-[1.1rem] text-foreground mb-5">
               Resumo
             </h2>
 
-            <div className="space-y-2.5 text-[13px] mb-5 pb-5 border-b border-[#E0D3C6]">
+            <div className="space-y-2.5 text-[13px] mb-5 pb-5 border-b border-border">
               {items.map((item) => (
-                <div key={`${item.id}-${item.tamanho}`} className="flex justify-between text-[#7A6458]">
+                <div key={`${item.id}-${item.tamanho}`} className="flex justify-between text-muted-foreground">
                   <span className="truncate max-w-[150px]">{item.nome} ×{item.quantidade}</span>
                   <span>{fmt(item.preco * item.quantidade)}</span>
                 </div>
@@ -199,11 +184,8 @@ export default function CheckoutPage() {
             </div>
 
             <div className="flex justify-between items-baseline">
-              <span className="text-[10px] tracking-[0.15em] uppercase text-[#7A6458]">Total</span>
-              <span
-                className="font-semibold text-xl text-[#1C1410]"
-                style={{ fontFamily: "var(--font-playfair)" }}
-              >
+              <span className="text-[10px] tracking-[0.15em] uppercase text-muted-foreground">Total</span>
+              <span className="font-heading font-semibold text-xl text-foreground">
                 {fmt(total())}
               </span>
             </div>

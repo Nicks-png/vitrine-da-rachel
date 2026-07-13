@@ -30,7 +30,7 @@ export default function ToggleAtivo({ id, ativo: initialAtivo }: Props) {
       onClick={toggle}
       disabled={loading}
       className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors focus:outline-none ${
-        ativo ? "bg-[#F4A7B9]" : "bg-gray-200"
+        ativo ? "bg-primary" : "bg-gray-200"
       } ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
       aria-label={ativo ? "Desativar" : "Ativar"}
     >

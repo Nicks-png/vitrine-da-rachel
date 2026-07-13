@@ -225,8 +225,8 @@ export default function ProductForm({ produto }: Props) {
               onClick={() => toggleTamanho(t)}
               className={`px-3 h-9 rounded-lg border text-sm font-medium transition-colors ${
                 form.tamanhos.includes(t)
-                  ? "bg-[#F4A7B9] text-white border-[#F4A7B9]"
-                  : "bg-white text-gray-700 border-gray-200 hover:border-[#F4A7B9]"
+                  ? "bg-primary text-primary-foreground border-primary"
+                  : "bg-white text-gray-700 border-gray-200 hover:border-primary"
               }`}
             >
               {t}
@@ -267,7 +267,7 @@ export default function ProductForm({ produto }: Props) {
           ))}
 
           {imagensExistentes.length + novosArquivos.length < 5 && (
-            <label className="w-20 h-20 rounded-lg border-2 border-dashed border-gray-200 hover:border-[#F4A7B9] cursor-pointer flex flex-col items-center justify-center gap-1 transition-colors">
+            <label className="w-20 h-20 rounded-lg border-2 border-dashed border-gray-200 hover:border-primary cursor-pointer flex flex-col items-center justify-center gap-1 transition-colors">
               <Upload size={16} className="text-gray-400" />
               <span className="text-[10px] text-gray-400">Foto</span>
               <input
@@ -289,7 +289,7 @@ export default function ProductForm({ produto }: Props) {
           id="ativo"
           checked={form.ativo}
           onChange={(e) => setForm({ ...form, ativo: e.target.checked })}
-          className="w-4 h-4 accent-[#F4A7B9]"
+          className="w-4 h-4 accent-primary"
         />
         <Label htmlFor="ativo" className="cursor-pointer">Produto visível na loja</Label>
       </div>
@@ -298,7 +298,7 @@ export default function ProductForm({ produto }: Props) {
         <Button
           type="submit"
           disabled={loading}
-          className="bg-[#F4A7B9] hover:bg-[#e8919e] text-white px-8"
+          className="bg-primary hover:bg-primary-hover text-primary-foreground px-8"
         >
           {loading ? "Salvando..." : produto ? "Salvar alterações" : "Criar produto"}
         </Button>

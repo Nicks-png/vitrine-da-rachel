@@ -61,7 +61,7 @@ export default async function AdminPedidosPage() {
                     <span className={`inline-block text-xs font-medium px-2.5 py-1 rounded-full ${statusInfo.color}`}>
                       {statusInfo.label}
                     </span>
-                    <p className="font-bold text-[#F4A7B9] text-lg mt-1">
+                    <p className="font-bold text-primary text-lg mt-1">
                       R$ {pedido.total.toFixed(2).replace(".", ",")}
                     </p>
                   </div>

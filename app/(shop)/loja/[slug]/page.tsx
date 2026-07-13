@@ -47,7 +47,7 @@ export default function ProdutoPage() {
   if (produto === undefined) {
     return (
       <div className="max-w-6xl mx-auto px-8 py-32 flex items-center justify-center">
-        <div className="w-7 h-7 rounded-full border-2 border-[#8B2E4A] border-t-transparent animate-spin" />
+        <div className="w-7 h-7 rounded-full border-2 border-primary border-t-transparent animate-spin" />
       </div>
     );
   }
@@ -81,10 +81,10 @@ export default function ProdutoPage() {
 
   return (
     <div className="max-w-6xl mx-auto px-8 py-14">
-      <div className="text-[10px] tracking-[0.15em] uppercase text-[#7A6458] mb-10 flex items-center gap-2">
-        <Link href="/loja" className="hover:text-[#1C1410] transition-colors">Loja</Link>
+      <div className="text-[10px] tracking-[0.15em] uppercase text-muted-foreground mb-10 flex items-center gap-2">
+        <Link href="/loja" className="hover:text-foreground transition-colors">Loja</Link>
         <span>/</span>
-        <Link href={`/loja?categoria=${encodeURIComponent(produto.categoria)}`} className="hover:text-[#1C1410] transition-colors">
+        <Link href={`/loja?categoria=${encodeURIComponent(produto.categoria)}`} className="hover:text-foreground transition-colors">
           {produto.categoria}
         </Link>
       </div>
@@ -92,7 +92,7 @@ export default function ProdutoPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-14">
         {/* Galeria */}
         <div className="space-y-3">
-          <div className="relative aspect-[3/4] bg-[#F2EAE0] overflow-hidden rounded-md">
+          <div className="relative aspect-[3/4] bg-muted overflow-hidden rounded-md">
             {produto.imagens[imgIdx] ? (
               <Image
                 src={produto.imagens[imgIdx]}
@@ -103,7 +103,7 @@ export default function ProdutoPage() {
               />
             ) : (
               <div className="w-full h-full flex items-center justify-center">
-                <ShoppingBag size={56} strokeWidth={1} className="text-[#E0D3C6]" />
+                <ShoppingBag size={56} strokeWidth={1} className="text-border" />
               </div>
             )}
 
@@ -134,7 +134,7 @@ export default function ProdutoPage() {
                   key={i}
                   onClick={() => setImgIdx(i)}
                   className={`relative shrink-0 w-16 h-20 overflow-hidden rounded border transition-colors ${
-                    i === imgIdx ? "border-[#8B2E4A]" : "border-transparent opacity-70 hover:opacity-100"
+                    i === imgIdx ? "border-primary" : "border-transparent opacity-70 hover:opacity-100"
                   }`}
                 >
                   <Image src={img} alt="" fill className="object-cover" />
@@ -146,32 +146,29 @@ export default function ProdutoPage() {
 
         {/* Detalhes */}
         <div className="flex flex-col">
-          <p className="text-[9px] tracking-[0.4em] uppercase text-[#B8956A] font-medium mb-3">
+          <p className="text-[9px] tracking-[0.4em] uppercase text-muted-foreground font-medium mb-3">
             {produto.categoria}
           </p>
-          <h1
-            className="text-[2.1rem] font-semibold text-[#1C1410] leading-[1.1] mb-5"
-            style={{ fontFamily: "var(--font-playfair)" }}
-          >
+          <h1 className="font-heading text-[2.1rem] font-semibold text-foreground leading-[1.1] mb-5">
             {produto.nome}
           </h1>
 
           <div className="flex items-baseline gap-3 mb-7">
-            <span className="text-2xl font-semibold text-[#8B2E4A]">{fmt(precoFinal)}</span>
+            <span className="text-2xl font-semibold text-foreground">{fmt(precoFinal)}</span>
             {temPromocao && (
-              <span className="text-sm text-[#7A6458]/70 line-through">{fmt(produto.preco)}</span>
+              <span className="text-sm text-muted-foreground/70 line-through">{fmt(produto.preco)}</span>
             )}
           </div>
 
           {produto.descricao && (
-            <p className="text-[#7A6458] text-[14px] leading-[1.85] mb-8 max-w-md">
+            <p className="text-muted-foreground text-[14px] leading-[1.85] mb-8 max-w-md">
               {produto.descricao}
             </p>
           )}
 
           {produto.tamanhos.length > 0 && (
             <div className="mb-8">
-              <p className="text-[10px] tracking-[0.2em] uppercase text-[#1C1410] font-medium mb-3">
+              <p className="text-[10px] tracking-[0.2em] uppercase text-foreground font-medium mb-3">
                 Tamanho
               </p>
               <div className="flex gap-2 flex-wrap">
@@ -181,8 +178,8 @@ export default function ProdutoPage() {
                     onClick={() => setTamanho(t)}
                     className={`rounded min-w-[44px] h-10 px-3 border text-[13px] font-medium transition-colors ${
                       tamanho === t
-                        ? "border-[#1C1410] bg-[#1C1410] text-white"
-                        : "border-[#E0D3C6] text-[#1C1410] hover:border-[#8B2E4A]"
+                        ? "border-primary bg-primary text-primary-foreground"
+                        : "border-border text-foreground hover:border-primary"
                     }`}
                   >
                     {t}
@@ -198,7 +195,7 @@ export default function ProdutoPage() {
                 Em estoque · {produto.estoque} {produto.estoque === 1 ? "peça" : "peças"}
               </span>
             ) : (
-              <span className="text-[10px] tracking-[0.15em] uppercase text-[#7A6458] font-medium">
+              <span className="text-[10px] tracking-[0.15em] uppercase text-muted-foreground font-medium">
                 Esgotado
               </span>
             )}
@@ -207,7 +204,7 @@ export default function ProdutoPage() {
           <button
             onClick={handleAdd}
             disabled={produto.estoque === 0}
-            className="rounded-md mt-auto w-full flex items-center justify-center gap-2.5 bg-[#1C1410] hover:bg-[#8B2E4A] disabled:opacity-40 disabled:pointer-events-none text-white text-[11px] tracking-[0.15em] uppercase font-medium py-4 transition-colors duration-300"
+            className="rounded-md mt-auto w-full flex items-center justify-center gap-2.5 bg-primary hover:bg-primary-hover disabled:opacity-40 disabled:pointer-events-none text-primary-foreground text-[11px] tracking-[0.15em] uppercase font-medium py-4 transition-colors duration-300"
           >
             <ShoppingBag size={15} />
             Adicionar ao carrinho

@@ -31,7 +31,7 @@ export default async function AdminProdutosPage() {
         </div>
         <Link
           href="/admin/produtos/novo"
-          className={cn(buttonVariants(), "bg-[#F4A7B9] hover:bg-[#e8919e] text-white border-0")}
+          className={cn(buttonVariants(), "bg-primary hover:bg-primary-hover text-primary-foreground border-0")}
         >
           <Plus size={16} className="mr-1" />
           Novo produto
@@ -41,7 +41,7 @@ export default async function AdminProdutosPage() {
       {produtos.length === 0 ? (
         <div className="text-center py-20 text-gray-400">
           <p>Nenhum produto ainda.</p>
-          <Link href="/admin/produtos/novo" className="text-[#F4A7B9] hover:underline mt-2 inline-block text-sm">
+          <Link href="/admin/produtos/novo" className="text-primary hover:underline mt-2 inline-block text-sm">
             Criar primeiro produto
           </Link>
         </div>
@@ -68,7 +68,7 @@ export default async function AdminProdutosPage() {
                   <td className="px-5 py-4 text-gray-900">
                     R$ {p.preco.toFixed(2).replace(".", ",")}
                     {p.preco_promocional && (
-                      <span className="ml-1 text-xs text-[#F4A7B9]">
+                      <span className="ml-1 text-xs text-primary">
                         → R$ {p.preco_promocional.toFixed(2).replace(".", ",")}
                       </span>
                     )}

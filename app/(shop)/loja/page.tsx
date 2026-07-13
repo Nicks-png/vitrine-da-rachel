@@ -59,18 +59,18 @@ export default async function LojaPage({ searchParams }: Props) {
           {secoes.ultimasUnidades.length > 0 && (
             <ProductCarousel eyebrow="Estoque limitado" titulo="Últimas unidades" produtos={secoes.ultimasUnidades} />
           )}
-          <div className="border-t border-[#E0D3C6]" />
+          <div className="border-t border-border" />
         </div>
       )}
 
       {/* Topo */}
       <div className="mb-12">
-        <p className="text-[9px] tracking-[0.4em] uppercase text-[#B8956A] mb-2">Bazar</p>
+        <p className="text-[9px] tracking-[0.4em] uppercase text-muted-foreground mb-2">Pitaya Rosa</p>
         <div className="flex items-end justify-between">
-          <h1 className="font-heading text-[2.2rem] font-semibold text-[#1C1410]">
+          <h1 className="font-heading text-[2.2rem] font-semibold text-foreground">
             {categoriaAtiva === "Todos" ? "Todos os produtos" : categoriaAtiva}
           </h1>
-          <span className="text-[12px] text-[#7A6458]">{produtos.length} peças</span>
+          <span className="text-[12px] text-muted-foreground">{produtos.length} peças</span>
         </div>
       </div>
 
@@ -82,8 +82,8 @@ export default async function LojaPage({ searchParams }: Props) {
             href={cat === "Todos" ? "/loja" : `/loja?categoria=${encodeURIComponent(cat)}`}
             className={`rounded-md text-[9.5px] tracking-[0.2em] uppercase px-6 py-2.5 border transition-colors duration-300 ${
               categoriaAtiva === cat
-                ? "bg-[#1C1410] text-white border-[#1C1410]"
-                : "bg-transparent text-[#7A6458] border-[#E0D3C6] hover:border-[#1C1410] hover:text-[#1C1410]"
+                ? "bg-primary text-primary-foreground border-primary"
+                : "bg-transparent text-muted-foreground border-border hover:border-primary hover:text-foreground"
             }`}
           >
             {cat}
@@ -93,8 +93,8 @@ export default async function LojaPage({ searchParams }: Props) {
 
       {/* Grid */}
       {produtos.length === 0 ? (
-        <div className="text-center py-28 text-[#7A6458]">
-          <p className="font-heading text-[1.8rem] text-[#1C1410] mb-3">Nenhuma peça encontrada</p>
+        <div className="text-center py-28 text-muted-foreground">
+          <p className="font-heading text-[1.8rem] text-foreground mb-3">Nenhuma peça encontrada</p>
           <p className="text-[13px]">Volte em breve — novas peças chegando.</p>
         </div>
       ) : (

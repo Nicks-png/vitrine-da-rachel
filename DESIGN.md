@@ -1,37 +1,34 @@
 ---
-name: Vitrine da Rachel
-description: Boutique de roupas e acessórios femininos, curadoria pessoal de Rachel Dias — fotografia em primeiro plano, acento âmbar pontual
+name: Pitaya Rosa
+description: Roupas e acessórios femininos, curadoria pessoal de Rachel Dias — identidade oficial de marca (brandbook do cliente), preto/dourado/cobre, minimalismo sofisticado
 colors:
-  ambar: "#A8481C"
-  ambar-hover: "#7A3512"
-  tinta: "#1C1410"
-  papel: "#FAF6EF"
-  pergaminho: "#F0E6D6"
-  card: "#FFFFFF"
-  taupe: "#6B5842"
-  borda: "#D8C4A8"
-  foil-dourado: "#D1A63B"
+  preto: "#111111"
+  branco: "#F8F7F4"
+  dourado-champagne: "#C7A76C"
+  cobre-fosco: "#B9825A"
+  marrom-espresso: "#4B372D"
+  bege-areia: "#DDD3C6"
 typography:
   display:
-    fontFamily: "Public Sans, system-ui, sans-serif"
+    fontFamily: "Cormorant Garamond, serif"
     fontWeight: 600
     lineHeight: 1.15
-    letterSpacing: "-0.02em"
+    letterSpacing: "-0.01em"
   body:
-    fontFamily: "Public Sans, system-ui, sans-serif"
+    fontFamily: "Montserrat, system-ui, sans-serif"
     fontSize: "14.5px"
     fontWeight: 400
     lineHeight: 1.8
   label:
-    fontFamily: "Public Sans, system-ui, sans-serif"
+    fontFamily: "Montserrat, system-ui, sans-serif"
     fontSize: "9px"
     fontWeight: 500
     letterSpacing: "0.3em"
 rounded:
-  sm: "0.1875rem"
-  md: "0.375rem"
-  lg: "0.375rem"
-  xl: "0.5625rem"
+  sm: "0.03125rem"
+  md: "0.0625rem"
+  lg: "0.0625rem"
+  xl: "0.09375rem"
 spacing:
   xs: "8px"
   sm: "12px"
@@ -40,125 +37,106 @@ spacing:
   xl: "80px"
 components:
   button-primary:
-    backgroundColor: "{colors.ambar}"
-    textColor: "#FFFFFF"
+    backgroundColor: "{colors.preto}"
+    textColor: "{colors.dourado-champagne}"
     rounded: "{rounded.md}"
     padding: "16px 36px"
   button-primary-hover:
-    backgroundColor: "{colors.ambar-hover}"
+    backgroundColor: "#2A2A2A"
   button-outline:
-    textColor: "{colors.taupe}"
+    textColor: "{colors.marrom-espresso}"
     rounded: "{rounded.md}"
     padding: "14px 36px"
   button-outline-hover:
-    textColor: "{colors.ambar}"
+    textColor: "{colors.preto}"
   input:
     backgroundColor: "#FFFFFF"
-    textColor: "{colors.tinta}"
+    textColor: "{colors.preto}"
     rounded: "{rounded.md}"
     padding: "12px 16px"
 ---
 
-# Design System: Vitrine da Rachel
+# Design System: Pitaya Rosa
 
 ## 1. Overview
 
-**Creative North Star: fotografia de moda em primeiro plano, acento âmbar pontual**
+**Creative North Star: identidade oficial de marca — brandbook do cliente**
 
-Duas iterações anteriores foram descartadas. A primeira (Playfair Display itálico + DM Sans tracked + paleta terrosa monocromática) era a linha "editorial-typographic" — o template de marca mais saturado de 2026 segundo a própria disciplina de design deste projeto, com bug de contraste WCAG AA no dourado antigo (#B8956A). A segunda (identidade "rótulo de perfumaria": bloco âmbar cheio + moldura de filete + fonte Italiana) foi rejeitada pelo cliente em avaliação direta: não comunicava "loja de moda feminina", a caixa de texto no hero não fazia sentido, e a fonte não passava qualidade.
+Esta é a terceira direção visual do projeto, e a primeira que não nasceu de exploração interna: a cliente trouxe um brandbook formal (`PITAYA ROSA`, versão 1.0) que substitui por completo a direção anterior (âmbar/tinta/Public Sans, calibrada em Animale/Farm Rio/Reformation). Não há mais espaço de decisão de cor/tipografia/logo em aberto — este documento registra as regras derivadas do brandbook para aplicação consistente no código.
 
-A direção atual foi calibrada em cima de três referências reais e consolidadas de e-commerce de moda (Animale, Farm Rio, Reformation), escolhidas explicitamente para reduzir risco em vez de arriscar um conceito abstrato de novo. Padrão comum às três: **a fotografia de moda domina o hero — nunca um bloco de cor sólida substituindo a foto** — com texto sobreposto direto na imagem (sem caixa, sem moldura), tipografia sans-serif limpa e confiante como voz única, e cor usada como acento pontual (botão, badge), não como superfície dominante.
+**Contexto histórico (3 direções, todas superadas por esta):**
+1. Playfair Display itálico + DM Sans + paleta terrosa monocromática — descartada por ser o template de marca mais saturado de 2026, com bug de contraste WCAG AA no dourado antigo.
+2. Identidade "rótulo de perfumaria" (bloco âmbar cheio + moldura de filete + fonte Italiana) — rejeitada pela cliente em avaliação direta.
+3. Fotografia-primeiro com acento âmbar pontual (Public Sans única) — calibrada em referências reais de e-commerce de moda, aprovada e publicada em produção. **Superada nesta rodada** pelo brandbook oficial da marca Pitaya Rosa.
 
 **Key Characteristics:**
-- Hero é sempre foto full-bleed com texto sobreposto (gradiente escuro para legibilidade), nunca um bloco de cor com caixa/moldura
-- Família tipográfica única: Public Sans em todos os pesos (400 corpo, 600 títulos) — hierarquia por peso/tamanho, não por mistura de famílias
-- Âmbar (`--primary`) é acento pontual: botão, preço em oferta, badge — nunca ocupa uma seção inteira como fundo
-- Dourado (`--foil-gold`) é acento raríssimo, só como texto sobre fundo tinta (`--ink`)
-- Sem eyebrow repetido em toda seção — usado com moderação, não como grade universal
-- Zero sombra — profundidade vem de blocos de cor sólida e bordas de 1px
+- Preto (`--primary`, `--ink`) é a superfície de assinatura da marca: botões, wordmark, sidebar admin, footer — sempre pareado com dourado champagne como texto/borda (nunca branco puro nesses contextos).
+- Dourado Champagne (`--foil-gold`, `--primary-foreground`) só existe como texto/borda sobre fundo preto — mesma lógica de contraste da "Regra do Foil" anterior, aplicada à nova paleta.
+- Cobre Fosco (`--copper`) é acento raro e **não deve ser usado como cor de texto em fundo claro** (reprova WCAG AA, 2,97:1) — reservado a elementos decorativos de baixo risco (linhas finas, ícones grandes) ou texto sobre fundo escuro, onde tem 5,57:1.
+- **Linhas retas.** O brandbook é explícito: "minimalismo sofisticado, linhas retas". Cantos praticamente retos (`--radius: 0.0625rem`) substituem o arredondamento 0.375rem da direção anterior.
+- Tipografia dupla: Cormorant Garamond (serifada, display/títulos) + Montserrat (sans, corpo/UI) — a primeira vez que este projeto usa um par tipográfico, porque agora é uma regra de marca externa, não uma escolha de design interna.
+- Wordmark é um retângulo com borda fina + texto letter-spaced (`PITAYA ROSA`) — recriado em CSS via `components/layout/Logo.tsx`, já que não há arquivo de logo vetorizado disponível.
 
 ## 2. Colors
 
-Estratégia **Restrained com um acento Committed pontual**: papel/pergaminho/tinta fazem o trabalho pesado neutro; âmbar aparece só em pontos de ação (botão, preço, badge) ou como scrim/gradiente sobre fotografia — nunca como fundo de seção inteira.
-
 ### Primary
-- **Âmbar** (#A8481C): cor de ação — botões primários, preço em oferta, badges. Hover escurece para #7A3512. Nunca é o fundo de uma seção inteira.
+- **Preto** (#111111): cor de ação — fundo de botões primários, wordmark, footer, sidebar admin. Hover escurece para #2A2A2A.
 
-### Secondary
-- **Foil Dourado** (#D1A63B): acento raríssimo, reservado a **texto sobre fundo tinta apenas** (7.98:1 de contraste). Nunca em fundo claro ou âmbar — nesses fundos ele reprova contraste (2.25:1 em papel, 2.56:1 em âmbar).
+### Accent (regra do foil, atualizada)
+- **Dourado Champagne** (#C7A76C): texto/borda **apenas sobre fundo preto** (8,0:1 de contraste). Em fundo claro, reprova (2,29:1) — nunca usar como texto em `--background`/`--card`/`--secondary`.
+- **Cobre Fosco** (#B9825A): acento secundário. Sobre preto, 5,57:1 (aprovado). Sobre branco/bege, 2,97:1 (reprova como texto — usar só decorativo: linha, ícone, hover de borda).
 
 ### Neutral
-- **Tinta** (#1C1410): texto principal, faixa de filosofia, footer, gradiente escuro sobre fotos (hero, categorias).
-- **Papel** (#FAF6EF): fundo padrão da página.
-- **Pergaminho** (#F0E6D6): fundo de seções alternadas (carrosséis), placeholder de imagem.
-- **Taupe** (#6B5842): texto secundário/muted, labels de categoria — substitui o dourado nessa função (era a causa do bug de contraste original).
-- **Borda** (#D8C4A8): filetes — cards, inputs, divisores.
+- **Branco** (#F8F7F4): fundo padrão da página (`--background`).
+- **Marrom Espresso** (#4B372D): texto secundário/muted (`--muted-foreground`), 10,07:1 sobre branco.
+- **Bege Areia** (#DDD3C6): fundo de seções alternadas, bordas (`--secondary`, `--muted`, `--border`).
 
 ### Named Rules
-**A Regra do Foil.** Dourado como texto só existe sobre `--ink`. Em qualquer outro fundo ele reprova WCAG AA — regra arquitetural, não exceção pontual.
+**A Regra do Foil (v2).** Dourado champagne como texto só existe sobre preto — mesma regra arquitetural do sistema anterior, agora aplicada à cor nova. Reprova em qualquer fundo claro.
 
-**A Regra do Âmbar-Nunca-Sob-Tinta.** Texto tinta direto sobre fundo âmbar mede 3,12:1 — reprova texto normal. Fundo âmbar sempre pareia com branco (`--primary-foreground`).
-
-**A Regra da Cor Pontual.** Âmbar é botão, preço, badge — nunca um bloco de fundo cobrindo uma seção inteira. Se uma seção parece precisar de "mais cor", a resposta é uma foto melhor, não mais âmbar.
+**A Regra do Cobre-Decorativo.** Cobre fosco nunca é cor de texto corrido em fundo claro. É acento de borda/ícone/hover, ou texto apenas sobre fundo escuro.
 
 ## 3. Typography
 
-**Família única:** Public Sans (fallback system-ui) — 100–900, normal e itálico. Mesma família para display e corpo; hierarquia vem de peso e tamanho, não de mistura de famílias.
-
-**Character:** Sans-serif geométrica limpa e confiante — a mesma lógica tipográfica de Animale, Farm Rio e Reformation: a fotografia carrega a personalidade da marca, a tipografia fica fora do caminho.
+**Par tipográfico oficial de marca:** Cormorant Garamond (display/títulos, serifada elegante) + Montserrat (corpo/UI, sans neutra). Diferente do sistema anterior — que evitava deliberadamente pares tipográficos — este par vem do brandbook da cliente e não é uma decisão de design interna a ser revisitada sem o cliente.
 
 ### Hierarchy
-- **Display** (600, letter-spacing -0.02em, line-height 1.15): títulos de seção e hero.
-- **Title** (600, ~1.1–1.4rem): subtítulos de card e componente.
-- **Body** (400, 13–14.5px, line-height 1.8): parágrafos e descrições, máx ~65–75ch.
-- **Label** (500, 8.5–11px, letter-spacing 0.15–0.4em, uppercase): categorias, kickers, botões.
-
-### Named Rules
-**A Regra da Família Única.** Não introduzir uma segunda família "de destaque" (serifada ou decorativa) sem um motivo forte e testado com o cliente — as duas tentativas anteriores de par tipográfico (Playfair/DM Sans, depois Italiana/Public Sans) foram rejeitadas. Público Sans sozinha, com contraste de peso, é o padrão até novo aviso.
+- **Display** (Cormorant Garamond, 600, letter-spacing -0.01em): títulos de seção, hero, wordmark.
+- **Body** (Montserrat, 400, 14.5px, line-height 1.8): parágrafos e descrições.
+- **Label** (Montserrat, 500, 9-11px, letter-spacing 0.15–0.4em, uppercase): categorias, kickers, botões.
 
 ## 4. Elevation
 
-Sistema completamente plano — nenhuma `box-shadow`. Profundidade vem de blocos de cor sólida e bordas de 1px.
-
-### Named Rules
-**A Regra do Sem-Sombra.** Se um componente parece precisar de elevação, a resposta é borda ou bloco de cor, nunca sombra.
+Sistema plano — nenhuma `box-shadow`. Profundidade vem de blocos de cor sólida e bordas de 1px, mesma lógica do sistema anterior.
 
 ## 5. Components
 
-### Hero
-Sempre foto full-bleed (`object-cover`, altura fixa ~560–640px) com gradiente `from-ink/75 via-ink/35 to-transparent` da esquerda para a direita, texto sobreposto direto na imagem (sem caixa, sem moldura, sem borda). CTA primário em âmbar cheio; secundário outline translúcido sobre a foto.
+### Logo / Wordmark
+`components/layout/Logo.tsx` — retângulo com borda fina + "PITAYA ROSA" em Cormorant Garamond, uppercase, letter-spacing largo. Duas variantes:
+- **light** (borda/texto preto): uso padrão em fundos claros — header, login admin.
+- **dark** (borda/texto dourado champagne): uso em fundos pretos — footer, sidebar admin.
+
+Recriado em CSS porque não existe arquivo de logo vetorizado da cliente — se ela fornecer um SVG/PNG oficial no futuro, substituir este componente pelo arquivo real.
 
 ### Buttons
-- **Shape:** cantos discretamente arredondados (0.375rem).
-- **Primary:** fundo âmbar, texto branco, hover escurece para #7A3512.
-- **Outline:** transparente, borda cor de borda (ou branco translúcido sobre foto), texto taupe (ou branco sobre foto); hover troca para âmbar/branco sólido.
-- **Hover / Focus:** easing `cubic-bezier(0.4, 0, 0.2, 1)`, 300ms. Foco visível usa `outline-ring outline-offset-2` — em fundo escuro (tinta/âmbar/foto), usa `focus-visible:outline-background`.
+- **Shape:** cantos quase retos (0.0625rem) — "linhas retas" do brandbook.
+- **Primary:** fundo preto, texto dourado champagne, hover escurece para #2A2A2A.
+- **Outline:** texto marrom espresso, hover preto.
 
 ### Cards / Containers
-- **Corner Style:** 0.375rem em imagens e cards.
-- **Background:** branco (`--card`, produto/carrinho) ou pergaminho (`--secondary`, carrosséis).
-- **Border:** 1px cor de borda em cards de formulário e itens de carrinho.
-
-### Carrossel de Curadoria
-Fileira horizontal com scroll-snap. `eyebrow` é opcional — usado com moderação, não em toda seção. Setas ficam desabilitadas (`opacity-30`, `pointer-events-none`) nas pontas da trilha via rastreamento de `scrollLeft`/`scrollWidth`.
-
-### Category label (product card)
-Cor migrada de dourado (`#B8956A`, 2,3–2,8:1, reprovava contraste) para `--muted-foreground` (taupe, 6,06–6,77:1 dependendo do fundo).
+- **Background:** branco/card (`--card`, produto/carrinho) ou bege areia (`--secondary`, carrosséis, resumo de carrinho/checkout).
+- **Border:** 1px bege areia em cards de formulário e itens de carrinho.
 
 ## 6. Do's and Don'ts
 
 ### Do:
-- **Do** liderar com fotografia de moda real — o hero e as categorias são sempre foto full-bleed.
-- **Do** manter dourado estritamente como texto-sobre-tinta.
-- **Do** manter as seções de produto (carrosséis, cards) em fundo papel/pergaminho neutro, para a fotografia não competir com um fundo saturado.
-- **Do** usar âmbar como acento pontual (botão, preço, badge), nunca como fundo de seção inteira.
-- **Do** testar mudanças grandes de direção com o cliente antes de propagar pelo site inteiro — duas iterações anteriores foram descartadas por não alinhar antes de implementar tudo.
+- **Do** manter dourado champagne estritamente como texto-sobre-preto.
+- **Do** usar cobre fosco só como acento decorativo (linha, ícone) fora de texto corrido em fundo claro.
+- **Do** manter cantos quase retos em botões, cards e inputs — é uma regra explícita do brandbook ("linhas retas"), não um detalhe opcional.
+- **Do** avisar a cliente se algum arquivo de logo vetorizado for produzido — o wordmark atual é uma recriação em CSS, não o asset oficial.
 
 ### Don't:
-- **Don't** reintroduzir Playfair Display, DM Sans ou Italiana — todas descartadas.
-- **Don't** colocar texto dentro de uma caixa/moldura decorativa como elemento central do hero — nenhuma referência real de e-commerce de moda faz isso.
-- **Don't** usar um bloco de cor sólida (sem foto) como hero.
-- **Don't** colocar dourado como texto fora de fundo tinta.
-- **Don't** colocar texto tinta direto sobre fundo âmbar (3,12:1, reprova).
-- **Don't** adicionar `box-shadow` a componentes — bloco de cor ou borda de 1px é o mecanismo de profundidade.
-- **Don't** repetir o padrão eyebrow-tracked-caps em toda seção sem exceção.
+- **Don't** reintroduzir Public Sans, âmbar (#A8481C) ou qualquer cor/fonte do sistema anterior — a direção mudou por identidade oficial de marca, não por preferência de design.
+- **Don't** usar dourado champagne ou cobre como texto em fundo claro.
+- **Don't** adicionar `box-shadow`.
+- **Don't** arredondar cantos além de `--radius` (0.0625rem) — contraria "linhas retas".

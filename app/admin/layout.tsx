@@ -2,6 +2,7 @@ import Link from "next/link";
 import { LayoutDashboard, Package, ShoppingCart, LogOut } from "lucide-react";
 import { Toaster } from "@/components/ui/sonner";
 import AdminLogout from "@/components/admin/AdminLogout";
+import Logo from "@/components/layout/Logo";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -9,10 +10,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       <Toaster richColors position="top-right" />
       <div className="min-h-screen flex">
         {/* Sidebar */}
-        <aside className="w-56 bg-[#2D2D2D] text-white flex flex-col shrink-0">
+        <aside className="w-56 bg-primary text-white flex flex-col shrink-0">
           <div className="p-5 border-b border-white/10">
-            <p className="font-heading font-bold text-lg">Vitrine da Rachel</p>
-            <p className="text-xs text-white/50">Admin</p>
+            <Logo variant="dark" className="text-[0.65rem] px-2.5 py-1" />
+            <p className="text-xs text-white/50 mt-2">Admin</p>
           </div>
 
           <nav className="flex-1 p-4 space-y-1">

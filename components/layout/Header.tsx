@@ -5,6 +5,7 @@ import { ShoppingBag, Menu, X, LayoutDashboard } from "lucide-react";
 import { useState, useSyncExternalStore } from "react";
 import { useCartStore } from "@/lib/cart-store";
 import CartDrawer from "@/components/shop/CartDrawer";
+import Logo from "@/components/layout/Logo";
 
 const emptySubscribe = () => () => {};
 
@@ -26,6 +27,7 @@ export default function Header() {
                 { label: "Loja", href: "/loja" },
                 { label: "Roupas", href: "/loja?categoria=Roupas" },
                 { label: "Acessórios", href: "/loja?categoria=Acessórios" },
+                { label: "Sobre", href: "/sobre" },
               ].map(({ label, href }) => (
                 <Link key={href} href={href}
                   className="text-[10.5px] tracking-[0.18em] uppercase font-medium text-muted-foreground hover:text-foreground transition-colors duration-300 relative group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm">
@@ -41,9 +43,7 @@ export default function Header() {
 
           {/* Logo — centro. Grid garante que nunca sobrepõe os ícones nas laterais, mesmo em telas estreitas. */}
           <Link href="/" className="justify-self-center md:absolute md:left-1/2 md:-translate-x-1/2 text-center group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm">
-            <span className="block font-heading uppercase text-[0.95rem] md:text-[1.2rem] text-foreground tracking-[0.03em] md:tracking-[0.04em] whitespace-nowrap leading-none">
-              Vitrine da Rachel
-            </span>
+            <Logo variant="light" className="text-[0.7rem] md:text-[0.8rem] px-3 py-1" />
             <span className="hidden sm:block text-[8px] tracking-[0.32em] uppercase text-muted-foreground font-medium mt-1.5">
               curadoria pessoal
             </span>
@@ -82,6 +82,7 @@ export default function Header() {
               { label: "Loja", href: "/loja" },
               { label: "Roupas", href: "/loja?categoria=Roupas" },
               { label: "Acessórios", href: "/loja?categoria=Acessórios" },
+              { label: "Sobre", href: "/sobre" },
             ].map(({ label, href }) => (
               <Link key={href} href={href}
                 className="text-[10.5px] tracking-[0.18em] uppercase font-medium text-muted-foreground hover:text-foreground transition-colors"
